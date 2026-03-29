@@ -2,6 +2,12 @@ import { getProducts } from "./services/api.js";
 
 const contenedorProductos = document.querySelector('#productos-lista');
 const inputBuscador = document.querySelector('#input-buscador');
+const modalElement = document.getElementById('detalleModal');
+const modalInstancia = new bootstrap.Modal(modalElement); // Instancia de Bootstrap para controlarlo desde JS
+const modalTitle = document.getElementById('modal-title');
+const modalDescription = document.getElementById('modal-description');
+const modalPrice = document.getElementById('modal-price');
+const btnAgregarCarrito = document.getElementById('btn-agregar-carrito');
 
 let productosEnMemoria = [];
 
@@ -46,4 +52,25 @@ inputBuscador.addEventListener('input', (evento) => {
     });
 
     renderizarCards(productosFiltrados);
+});
+
+contenedorProductos.addEventListener('click', (evento) => {
+
+    if (evento.target.classList.contains('btn-detalle')) {
+        
+        const productoId = parseInt(evento.target.getAttribute('data-id'));
+
+        const productoSeleccionado = productosEnMemoria.find(producto => producto.id === productoId);
+
+        if (productoSeleccionado) {
+            modalTitle.textContent = productoSeleccionado.title;
+            modalDescription.textContent = productoSeleccionado.description;
+            modalPrice.textContent = `$${productoSeleccionado.price}`;
+
+            // id de producto para el carrito
+            btnAgregarCarrito.setAttribute('data-id', productoSeleccionado.id);
+            
+            modalInstancia.show();
+        }
+    }
 });
