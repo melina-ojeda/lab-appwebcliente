@@ -1,4 +1,4 @@
-const API_URL = 'https://api.ejemplo.com/productos';
+const API_URL = 'https://fakestoreapi.com/products';
 
 export async function getProducts() {
     try {
