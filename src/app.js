@@ -13,7 +13,7 @@ let productosEnMemoria = [];
 
 function renderizarCards(productosParaMostrar) {
     let template = '';
-    
+
     if (productosParaMostrar.length === 0) {
         contenedorProductos.innerHTML = '<p class="text-center w-100">No se encontraron productos.</p>';
         return;
@@ -34,7 +34,7 @@ function renderizarCards(productosParaMostrar) {
             </div>
         `;
     });
-    
+
     contenedorProductos.innerHTML = template;
 }
 
@@ -45,7 +45,7 @@ getProducts().then((products) => {
 
 inputBuscador.addEventListener('input', (evento) => {
 
-    const textoBusqueda = evento.target.value.toLowerCase(); 
+    const textoBusqueda = evento.target.value.toLowerCase();
 
     const productosFiltrados = productosEnMemoria.filter((producto) => {
         return producto.title.toLowerCase().includes(textoBusqueda);
@@ -57,7 +57,7 @@ inputBuscador.addEventListener('input', (evento) => {
 contenedorProductos.addEventListener('click', (evento) => {
 
     if (evento.target.classList.contains('btn-detalle')) {
-        
+
         const productoId = parseInt(evento.target.getAttribute('data-id'));
 
         const productoSeleccionado = productosEnMemoria.find(producto => producto.id === productoId);
@@ -69,7 +69,7 @@ contenedorProductos.addEventListener('click', (evento) => {
 
             // id de producto para el carrito
             btnAgregarCarrito.setAttribute('data-id', productoSeleccionado.id);
-            
+
             modalInstancia.show();
         }
     }

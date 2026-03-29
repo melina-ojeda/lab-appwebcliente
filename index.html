@@ -1,80 +1,93 @@
 <!doctype html>
 <html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App web cliente</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>App web cliente</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  
-  <body>
-    <head>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Inicio</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Productos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Ofertas</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categorías
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Tecnología</a></li>
-            <li><a class="dropdown-item" href="#">Hogar</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Indumentaria</a></li>
-          </ul>
-        </li>
-        <!--<li class="nav-item">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Inicio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Ofertas</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Categorías
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Tecnología</a></li>
+                <li><a class="dropdown-item" href="#">Hogar</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Indumentaria</a></li>
+              </ul>
+            </li>
+            <!--<li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>>-->
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" id="input-buscador" type="search" placeholder="Buscar un producto" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
-    </div>
-  </div>
-        </nav>
-    </head>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" id="input-buscador" type="search" placeholder="Buscar un producto"
+              aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </head>
 
-    <h1>App web cliente</h1>
-    
-    <!-- card producto-->
-    <div class="container mt-4">
-      <div id="productos-lista" class="row row-cols-1 row-cols-md-3 g-4"></div>
-    </div>
-    <!-- template de modal -->
-    <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5 text-truncate" id="modal-title">Título del Producto</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p id="modal-description">Descripción detallada...</p>
-            <h3 class="text-success" id="modal-price">$0.00</h3>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar (X)</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-agregar-carrito">Agregar al carrito</button>
-          </div>
+  <h1>App web cliente</h1>
+
+  <!-- card producto-->
+  <div class="container mt-4">
+    <div id="productos-lista" class="row row-cols-1 row-cols-md-3 g-4"></div>
+  </div>
+  
+  <!-- template de modal -->
+  <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-truncate" id="modal-title">Título del Producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modal-description">Descripción detallada...</p>
+          <h3 class="text-success" id="modal-price">$0.00</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar (X)</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-agregar-carrito">Agregar al
+            carrito</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script type="module" src="./src/app.js"></script> <!-- el atributo módulo nos permite trabajar en base a funciones y que esas funciones se puedan importar/exportar en los distintos archivos js, lo que nos permite organizar mejor el código y reutilizarlo.-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script type="module" src="./src/app.js"></script>
+  <!-- el atributo módulo nos permite trabajar en base a funciones y que esas funciones se puedan importar/exportar en los distintos archivos js, lo que nos permite organizar mejor el código y reutilizarlo.-->
 </body>
 
 
