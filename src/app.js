@@ -1,4 +1,5 @@
 import { getProducts } from "./services/api.js";
+import { addToCart } from "./services/cart.js";
 
 const contenedorProductos = document.querySelector('#productos-lista');
 const inputBuscador = document.querySelector('#input-buscador');
@@ -10,6 +11,7 @@ const modalPrice = document.getElementById('modal-price');
 const btnAgregarCarrito = document.getElementById('btn-agregar-carrito');
 
 let productosEnMemoria = [];
+let productoActual = null;
 
 function renderizarCards(productosParaMostrar) {
     let template = '';
@@ -63,14 +65,21 @@ contenedorProductos.addEventListener('click', (evento) => {
         const productoSeleccionado = productosEnMemoria.find(producto => producto.id === productoId);
 
         if (productoSeleccionado) {
+            productoActual = productoSeleccionado;
             modalTitle.textContent = productoSeleccionado.title;
             modalDescription.textContent = productoSeleccionado.description;
             modalPrice.textContent = `$${productoSeleccionado.price}`;
 
-            // id de producto para el carrito
             btnAgregarCarrito.setAttribute('data-id', productoSeleccionado.id);
 
             modalInstancia.show();
         }
+    }
+});
+
+btnAgregarCarrito.addEventListener('click', () => {
+    if (productoActual) {
+        addToCart(productoActual);
+        console.log('Producto agregado al carrito:', productoActual);
     }
 });
