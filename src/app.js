@@ -1,5 +1,5 @@
 import { getProducts } from "./services/api.js";
-import { addToCart } from "./services/cart.js";
+import { addToCart, getCart } from "./services/cart.js";
 
 const contenedorProductos = document.querySelector('#productos-lista');
 const inputBuscador = document.querySelector('#input-buscador');
@@ -9,9 +9,53 @@ const modalTitle = document.getElementById('modal-title');
 const modalDescription = document.getElementById('modal-description');
 const modalPrice = document.getElementById('modal-price');
 const btnAgregarCarrito = document.getElementById('btn-agregar-carrito');
+const cartItemsContainer = document.getElementById('cart-items-container');
+const cartBadge = document.getElementById('cart-badge');
+const cartTotals = document.getElementById('cart-totals');
+const cartTotal = document.getElementById('cart-total');
 
 let productosEnMemoria = [];
 let productoActual = null;
+
+function renderCart() {
+    const cart = getCart();
+    
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="text-muted">El carrito está vacío</p>';
+        cartTotals.style.display = 'none';
+        cartBadge.textContent = '0';
+        return;
+    }
+
+    let template = '';
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    cart.forEach((item) => {
+        totalItems += item.quantity;
+        totalPrice += item.price * item.quantity;
+
+        template += `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+                <div class="cart-item-details">
+                    <div class="cart-item-title">${item.title}</div>
+                    <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                    <div class="cart-item-quantity">
+                        <span>Qty:</span>
+                        <span>${item.quantity}</span>
+                    </div>
+                </div>
+                <div>${(item.price * item.quantity).toFixed(2)}</div>
+            </div>
+        `;
+    });
+
+    cartItemsContainer.innerHTML = template;
+    cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+    cartTotals.style.display = 'block';
+    cartBadge.textContent = totalItems;
+}
 
 function renderizarCards(productosParaMostrar) {
     let template = '';
@@ -43,6 +87,7 @@ function renderizarCards(productosParaMostrar) {
 getProducts().then((products) => {
     productosEnMemoria = products;
     renderizarCards(productosEnMemoria);
+    renderCart();
 });
 
 inputBuscador.addEventListener('input', (evento) => {
@@ -70,6 +115,7 @@ contenedorProductos.addEventListener('click', (evento) => {
             modalDescription.textContent = productoSeleccionado.description;
             modalPrice.textContent = `$${productoSeleccionado.price}`;
 
+            // id de producto para el carrito
             btnAgregarCarrito.setAttribute('data-id', productoSeleccionado.id);
 
             modalInstancia.show();
@@ -80,6 +126,6 @@ contenedorProductos.addEventListener('click', (evento) => {
 btnAgregarCarrito.addEventListener('click', () => {
     if (productoActual) {
         addToCart(productoActual);
-        console.log('Producto agregado al carrito:', productoActual);
+        renderCart();
     }
 });
