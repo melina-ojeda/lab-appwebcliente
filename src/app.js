@@ -1,5 +1,5 @@
 import { getProducts } from "./services/api.js";
-import { addToCart, getCart } from "./services/cart.js";
+import { addToCart, getCart, incrementQuantity, decrementQuantity, removeFromCart } from "./services/cart.js";
 
 const contenedorProductos = document.querySelector('#productos-lista');
 const inputBuscador = document.querySelector('#input-buscador');
@@ -42,11 +42,15 @@ function renderCart() {
                     <div class="cart-item-title">${item.title}</div>
                     <div class="cart-item-price">$${item.price.toFixed(2)}</div>
                     <div class="cart-item-quantity">
-                        <span>Qty:</span>
-                        <span>${item.quantity}</span>
+                        <button class="btn btn-sm btn-outline-secondary btn-decrement" data-id="${item.id}">-</button>
+                        <span class="px-2">${item.quantity}</span>
+                        <button class="btn btn-sm btn-outline-secondary btn-increment" data-id="${item.id}">+</button>
                     </div>
                 </div>
-                <div>${(item.price * item.quantity).toFixed(2)}</div>
+                <div class="text-end">
+                    <div class="mb-2">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <button class="btn btn-sm btn-danger btn-remove" data-id="${item.id}">Remove</button>
+                </div>
             </div>
         `;
     });
@@ -126,6 +130,21 @@ contenedorProductos.addEventListener('click', (evento) => {
 btnAgregarCarrito.addEventListener('click', () => {
     if (productoActual) {
         addToCart(productoActual);
+        renderCart();
+    }
+});
+
+cartItemsContainer.addEventListener('click', (evento) => {
+    const productId = parseInt(evento.target.getAttribute('data-id'));
+
+    if (evento.target.classList.contains('btn-increment')) {
+        incrementQuantity(productId);
+        renderCart();
+    } else if (evento.target.classList.contains('btn-decrement')) {
+        decrementQuantity(productId);
+        renderCart();
+    } else if (evento.target.classList.contains('btn-remove')) {
+        removeFromCart(productId);
         renderCart();
     }
 });

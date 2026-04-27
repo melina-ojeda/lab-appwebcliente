@@ -35,3 +35,34 @@ export function clearCart() {
     localStorage.removeItem('cart');
     return [];
 }
+
+export function incrementQuantity(productId) {
+    const cart = getCartFromStorage();
+    const product = cart.find(item => item.id === productId);
+    
+    if (product) {
+        product.quantity += 1;
+        saveCartToStorage(cart);
+    }
+    
+    return cart;
+}
+
+export function decrementQuantity(productId) {
+    const cart = getCartFromStorage();
+    const product = cart.find(item => item.id === productId);
+    
+    if (product && product.quantity > 1) {
+        product.quantity -= 1;
+        saveCartToStorage(cart);
+    }
+    
+    return cart;
+}
+
+export function removeFromCart(productId) {
+    const cart = getCartFromStorage();
+    const filteredCart = cart.filter(item => item.id !== productId);
+    saveCartToStorage(filteredCart);
+    return filteredCart;
+}
