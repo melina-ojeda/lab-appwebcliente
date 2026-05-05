@@ -13,6 +13,7 @@ const cartItemsContainer = document.getElementById('cart-items-container');
 const cartBadge = document.getElementById('cart-badge');
 const cartTotals = document.getElementById('cart-totals');
 const cartTotal = document.getElementById('cart-total');
+const modalImg = document.getElementById('modal-img');
 
 let productosEnMemoria = [];
 let productoActual = null;
@@ -118,6 +119,7 @@ contenedorProductos.addEventListener('click', (evento) => {
             modalTitle.textContent = productoSeleccionado.title;
             modalDescription.textContent = productoSeleccionado.description;
             modalPrice.textContent = `$${productoSeleccionado.price}`;
+            modalImg.src = productoSeleccionado.image;
 
             // id de producto para el carrito
             btnAgregarCarrito.setAttribute('data-id', productoSeleccionado.id);
