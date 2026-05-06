@@ -11,54 +11,42 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Inicio</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Productos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Ofertas</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Categorías
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Tecnología</a></li>
-                <li><a class="dropdown-item" href="#">Hogar</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Indumentaria</a></li>
-              </ul>
-            </li>
-            <!--<li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>>-->
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" id="input-buscador" type="search" placeholder="Buscar un producto"
-              aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
-          <button class="btn btn-outline-info ms-2 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
-            <div class="position-relative d-inline-block me-2">
-            <i id="cart-icon" class="bi bi-cart3" style="font-size: 1.4rem;"></i>
-            <span class="badge-floating" id="cart-badge">0</span>
-            </div>
-          <span class="d-none d-md-inline">Carrito</span>
-        </button>
+    <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-primary" href="#">Inicio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        </ul>
+
+      <form class="d-flex buscador-custom" role="search">
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search text-muted"></i>
+          </span>
+          <input 
+            class="form-control border-start-0 ps-0" 
+            id="input-buscador" 
+            type="search" 
+            placeholder="¿Qué estás buscando?" 
+            aria-label="Search" 
+          />
         </div>
-      </div>
-    </nav>
+      </form>
+
+      <button class="btn btn-outline-primary ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+        <div class="position-relative d-inline-block me-2">
+          <i id="cart-icon" class="bi bi-cart3" style="font-size: 1.4rem;"></i>
+          <span class="badge-floating" id="cart-badge">0</span>
+        </div>
+        <span class="d-none d-md-inline">Carrito</span>
+      </button>
+    </div>
+  </div>
+</nav>
 
   <h1>Tienda Libre</h1>
 
@@ -94,7 +82,7 @@
 
   <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="cartOffcanvasLabel">Shopping Cart</h5>
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel">Detalle de mi pedido</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
