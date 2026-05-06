@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+    --bs-body-font-family: 'DM Sans', sans-serif;
+    --bs-heading-font-family: 'DM Sans', sans-serif;
+}
+
+h1{
+  
+    font-weight: 700;
+    color: #0d6efd;
+    text-align: center;
+    margin-left: 20px;
+}
+
 /* Cart Styles */
 #cart-items-container {
     max-height: calc(100vh - 250px);
@@ -10,6 +24,22 @@
     gap: 1rem;
     padding: 1rem 0;
     border-bottom: 1px solid #e9ecef;
+}
+
+#productos-lista{
+    margin-top: 20px;
+}
+
+#productos-lista .card {
+    border: 2px solid transparent;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#productos-lista .card:hover {
+    transform: translateY(-5px);
+    border-color: #0d6efd;
 }
 
 .cart-item-image {
@@ -95,12 +125,22 @@
 }
 
 #btn-agregar-carrito {
-  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  color: #0d6efd;
   border: none;
-  padding: 12px;
+  padding: 8px;
+  transition: all 0.2s ease;
+}
+
+#btn-agregar-carrito p {
+  color: white;
   font-size: 1rem;
   font-weight: 500;
-  transition: all 0.2s ease;
+  margin-bottom: 0;
+}
+
+.btn-outline-info {
+    color: #0d6efd;
+    border-color: #0d6efd;
 }
 
 #btn-agregar-carrito:hover {
@@ -145,3 +185,51 @@
   display: flex;
   justify-content: center;
 }
+
+/* Icon cart*/
+.btn-outline-info {
+    border-radius: 10px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.bi-cart3 {
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+.btn-outline-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.position-relative {
+  display: inline-flex !important;
+  vertical-align: middle;
+}
+
+.badge-floating {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #dc3545;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border: 1px solid white;
+  z-index: 1;
+}
+
+#cart-badge:contains("0") {
+  display: none;
+}
+

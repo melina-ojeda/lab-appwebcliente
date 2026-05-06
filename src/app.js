@@ -14,16 +14,14 @@ const cartBadge = document.getElementById('cart-badge');
 const cartTotals = document.getElementById('cart-totals');
 const cartTotal = document.getElementById('cart-total');
 const modalImg = document.getElementById('modal-img');
-
 const toastEl = document.getElementById('toastCarrito');
 const toastBody = document.getElementById('toast-body');
-
 const toast = toastEl ? new bootstrap.Toast(toastEl, { delay: 2000 }) : null;
+const cartIcon = document.getElementById('cart-icon');
 
 modalElement.addEventListener('hidden.bs.modal', () => {
     document.body.classList.remove('modal-open');
     document.body.style = '';
-
     document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
 });
 
@@ -32,12 +30,18 @@ let productoActual = null;
 
 function renderCart() {
     const cart = getCart();
-    
+    const cartIcon = document.getElementById('cart-icon'); 
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<p class="text-muted">El carrito está vacío</p>';
         cartTotals.style.display = 'none';
         cartBadge.textContent = '0';
-        return;
+        cartBadge.style.display = 'none';
+
+        if (cartIcon) {
+            cartIcon.classList.remove('bi-cart-fill');
+            cartIcon.classList.add('bi-cart3');
+        }
+        return; 
     }
 
     let template = '';
@@ -48,20 +52,22 @@ function renderCart() {
         totalItems += item.quantity;
         totalPrice += Number(item.price) * Number(item.quantity);
         template += `
-            <div class="cart-item">
-                <img src="${item.image || ''}" alt="${item.title}" class="cart-item-image">
-                <div class="cart-item-details">
-                    <div class="cart-item-title">${item.title}</div>
-                    <div class="cart-item-price">$${Number(item.price).toFixed(2)}</div>
-                    <div class="cart-item-quantity">
-                        <button class="btn btn-sm btn-outline-secondary btn-decrement" data-id="${item.id}">-</button>
+            <div class="cart-item d-flex align-items-center mb-3">
+                <img src="${item.image || ''}" alt="${item.title}" class="cart-item-image me-3" style="width: 50px; height: 50px; object-fit: contain;">
+                <div class="cart-item-details flex-grow-1">
+                    <div class="cart-item-title fw-bold" style="font-size: 0.9rem;">${item.title}</div>
+                    <div class="cart-item-price text-muted">$${Number(item.price).toFixed(2)}</div>
+                    <div class="cart-item-quantity d-flex align-items-center mt-1">
+                        <button class="btn btn-sm btn-outline-secondary btn-decrement py-0 px-2" data-id="${item.id}">-</button>
                         <span class="px-2">${item.quantity}</span>
-                        <button class="btn btn-sm btn-outline-secondary btn-increment" data-id="${item.id}">+</button>
+                        <button class="btn btn-sm btn-outline-secondary btn-increment py-0 px-2" data-id="${item.id}">+</button>
                     </div>
                 </div>
                 <div class="text-end">
-                    <div class="mb-2">$${(item.price * item.quantity).toFixed(2)}</div>
-                    <button class="btn btn-sm btn-danger btn-remove" data-id="${item.id}">Remove</button>
+                    <div class="mb-2 fw-bold">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <button class="btn btn-sm btn-danger btn-remove" data-id="${item.id}">
+                        <i class="bi bi-trash"></i>
+                    </button>
                 </div>
             </div>
         `;
@@ -70,7 +76,15 @@ function renderCart() {
     cartItemsContainer.innerHTML = template;
     cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
     cartTotals.style.display = 'block';
+    
+    //actualizar badge 
     cartBadge.textContent = totalItems;
+    cartBadge.style.display = 'flex'; 
+
+    if (cartIcon) {
+        cartIcon.classList.remove('bi-cart3');
+        cartIcon.classList.add('bi-cart-fill');
+    }
 }
 
 function renderizarCards(productosParaMostrar) {
@@ -90,7 +104,7 @@ function renderizarCards(productosParaMostrar) {
                         <h5 class="card-title text-truncate" title="${p.title}">${p.title}</h5>
                         <p class="card-text text-truncate">${p.description}</p>
                         <h4 class="text-center mt-auto">$${p.price}</h4>
-                        <button class="btn btn-primary btn-detalle mt-2" data-id="${p.id}">Ver Detalle</button>
+                        <button class="btn btn-primary btn-detalle mt-2" data-id="${p.id}">Ver producto</button>
                     </div>
                 </div>
             </div>
