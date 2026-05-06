@@ -15,6 +15,18 @@ const cartTotals = document.getElementById('cart-totals');
 const cartTotal = document.getElementById('cart-total');
 const modalImg = document.getElementById('modal-img');
 
+const toastEl = document.getElementById('toastCarrito');
+const toastBody = document.getElementById('toast-body');
+
+const toast = toastEl ? new bootstrap.Toast(toastEl, { delay: 2000 }) : null;
+
+modalElement.addEventListener('hidden.bs.modal', () => {
+    document.body.classList.remove('modal-open');
+    document.body.style = '';
+
+    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+});
+
 let productosEnMemoria = [];
 let productoActual = null;
 
@@ -34,14 +46,13 @@ function renderCart() {
 
     cart.forEach((item) => {
         totalItems += item.quantity;
-        totalPrice += item.price * item.quantity;
-
+        totalPrice += Number(item.price) * Number(item.quantity);
         template += `
             <div class="cart-item">
-                <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+                <img src="${item.image || ''}" alt="${item.title}" class="cart-item-image">
                 <div class="cart-item-details">
                     <div class="cart-item-title">${item.title}</div>
-                    <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                    <div class="cart-item-price">$${Number(item.price).toFixed(2)}</div>
                     <div class="cart-item-quantity">
                         <button class="btn btn-sm btn-outline-secondary btn-decrement" data-id="${item.id}">-</button>
                         <span class="px-2">${item.quantity}</span>
@@ -129,12 +140,21 @@ contenedorProductos.addEventListener('click', (evento) => {
     }
 });
 
+
+
 btnAgregarCarrito.addEventListener('click', () => {
-    if (productoActual) {
+    if (!productoActual) return;
         addToCart(productoActual);
         renderCart();
+
+        modalInstancia.hide();
+        
+        if (toast && toastBody) {
+        toastBody.textContent = `${productoActual.title} agregado al carrito`;
+        toast.show();
     }
 });
+
 
 cartItemsContainer.addEventListener('click', (evento) => {
     const productId = parseInt(evento.target.getAttribute('data-id'));
