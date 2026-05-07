@@ -96,9 +96,9 @@ function renderizarCards(productosParaMostrar) {
                 <div class="card h-100" style="width: 18rem;">
                     <img src="${p.image}" class="card-img-top p-3" alt="${p.title}" style="height: 250px; object-fit: contain;">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-truncate" title="${p.title}">${p.title}</h5>
+                        <h2 class="h5 card-title text-truncate" title="${p.title}">${p.title}</h2>
                         <p class="card-text text-truncate">${p.description}</p>
-                        <h4 class="text-center mt-auto">$${p.price}</h4>
+                        <p class="text-center mt-auto">$${p.price}</p>
                         <button class="btn btn-primary btn-detalle mt-2" data-id="${p.id}">Ver producto</button>
                     </div>
                 </div>
