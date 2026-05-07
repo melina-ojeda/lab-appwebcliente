@@ -1,5 +1,5 @@
 import { getProducts } from "./services/api.js";
-import { addToCart, getCart, incrementQuantity, decrementQuantity, removeFromCart } from "./services/cart.js";
+import { addToCart, getCart, incrementQuantity, decrementQuantity, removeFromCart, clearCart } from "./services/cart.js";
 
 const contenedorProductos = document.querySelector('#productos-lista');
 const inputBuscador = document.querySelector('#input-buscador');
@@ -18,6 +18,8 @@ const toastEl = document.getElementById('toastCarrito');
 const toastBody = document.getElementById('toast-body');
 const toast = toastEl ? new bootstrap.Toast(toastEl, { delay: 2000 }) : null;
 const cartIcon = document.getElementById('cart-icon');
+const btnCheckout = document.getElementById('btn-checkout');
+const btnClearCart = document.getElementById('btn-clear-cart');
 
 
 let productosEnMemoria = [];
@@ -166,16 +168,93 @@ btnAgregarCarrito.addEventListener('click', () => {
 
 
 cartItemsContainer.addEventListener('click', (evento) => {
-    const productId = parseInt(evento.target.getAttribute('data-id'));
+    const button = evento.target.closest('button');
+    if (!button) return;
 
-    if (evento.target.classList.contains('btn-increment')) {
+    const productId = parseInt(button.getAttribute('data-id'));
+
+    if (button.classList.contains('btn-increment')) {
         incrementQuantity(productId);
         renderCart();
-    } else if (evento.target.classList.contains('btn-decrement')) {
+    } else if (button.classList.contains('btn-decrement')) {
         decrementQuantity(productId);
         renderCart();
-    } else if (evento.target.classList.contains('btn-remove')) {
+    } else if (button.classList.contains('btn-remove')) {
         removeFromCart(productId);
         renderCart();
     }
 });
+<<<<<<< HEAD
+=======
+
+btnCheckout.addEventListener('click', () => {
+    const cart = getCart();
+    if (cart.length === 0) {
+        Swal.fire({
+            title: 'Carrito vacío',
+            text: 'Debes agregar productos antes de finalizar la compra',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        });
+        return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    Swal.fire({
+        title: '¿Finalizar compra?',
+        html: `<p>Total a pagar: <strong>$${total.toFixed(2)}</strong></p>`,
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar pedido',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            clearCart();
+            renderCart();
+            
+            Swal.fire({
+                title: '¡Compra realizada!',
+                text: 'Tu pedido ha sido confirmado. Pronto recibirás detalles de envío.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    });
+});
+
+btnClearCart.addEventListener('click', () => {
+    const cart = getCart();
+    if (cart.length === 0) {
+        Swal.fire({
+            title: 'Carrito vacío',
+            text: 'No hay productos para eliminar',
+            icon: 'info',
+            confirmButtonText: 'Aceptar'
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: '¿Eliminar todo?',
+        text: 'Se eliminarán todos los productos del carrito',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#dc3545'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            clearCart();
+            renderCart();
+            
+            Swal.fire({
+                title: 'Carrito vaciado',
+                text: 'Se han eliminado todos los productos',
+                icon: 'info',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    });
+});
+>>>>>>> fcbae9e28feb9daed8083e1489ca9dbc3f29015d
