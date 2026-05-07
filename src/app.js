@@ -19,11 +19,6 @@ const toastBody = document.getElementById('toast-body');
 const toast = toastEl ? new bootstrap.Toast(toastEl, { delay: 2000 }) : null;
 const cartIcon = document.getElementById('cart-icon');
 
-modalElement.addEventListener('hidden.bs.modal', () => {
-    document.body.classList.remove('modal-open');
-    document.body.style = '';
-    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
-});
 
 let productosEnMemoria = [];
 let productoActual = null;

@@ -66,3 +66,4 @@ export function removeFromCart(productId) {
     saveCartToStorage(filteredCart);
     return filteredCart;
 }
+
