@@ -64,10 +64,10 @@ El trabajo de Luis proporciona la base sólida de lógica de negocio que permite
 
 ---
 
-### 👨‍💻 **Germán Galván** | [@gngalvan](https://github.com/gngalvan)
+### 👨‍💻 **Gonzalo Galván** | [@gngalvan](https://github.com/gngalvan)
 **Integración de API - Lógica de Datos y Renderizado**
 
-Germán fue responsable de la integración con datos externos, implementando lógica JavaScript esencial para obtener y mostrar información. Sus contribuciones incluyen:
+Gonzalo fue responsable de la integración con datos externos, implementando lógica JavaScript esencial para obtener y mostrar información. Sus contribuciones incluyen:
 
 **Lógica JavaScript (Datos):**
 - **Servicio de API (`api.js`)**: Implementación de función `async/await` con `fetch()` para llamadas HTTP
@@ -81,7 +81,7 @@ Germán fue responsable de la integración con datos externos, implementando ló
 - Estructura visual con imagen, título, descripción y precio
 - Integración con carrito para permitir agregar productos
 
-El trabajo de Germán asegura que los datos se obtengan de manera eficiente desde la API, se procesen correctamente y se presenten al usuario de forma clara y accesible.
+El trabajo de Gonzalo asegura que los datos se obtengan de manera eficiente desde la API, se procesen correctamente y se presenten al usuario de forma clara y accesible.
 
 ---
 

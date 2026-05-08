@@ -184,8 +184,6 @@ cartItemsContainer.addEventListener('click', (evento) => {
         renderCart();
     }
 });
-<<<<<<< HEAD
-=======
 
 btnCheckout.addEventListener('click', () => {
     const cart = getCart();
@@ -257,4 +255,3 @@ btnClearCart.addEventListener('click', () => {
         }
     });
 });
->>>>>>> fcbae9e28feb9daed8083e1489ca9dbc3f29015d
